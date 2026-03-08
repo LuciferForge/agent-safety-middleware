@@ -1,0 +1,10 @@
+ai-injection-guard>=0.1.0
+ai-cost-guard>=0.1.0
+ai-decision-tracer>=0.1.0
+
+[dev]
+pytest>=7.0
+pytest-asyncio>=0.21
+
+[signed]
+cryptography>=41

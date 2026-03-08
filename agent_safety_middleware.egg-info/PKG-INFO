@@ -1,0 +1,84 @@
+Metadata-Version: 2.4
+Name: agent-safety-middleware
+Version: 0.1.0
+Summary: One-line safety middleware for AI agent APIs. Prompt injection scanning, cost budgets, decision audit trails. Works with FastAPI, Flask, and any ASGI/WSGI framework.
+Author-email: LuciferForge <LuciferForge@proton.me>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/LuciferForge/agent-safety-middleware
+Project-URL: Repository, https://github.com/LuciferForge/agent-safety-middleware
+Keywords: fastapi,flask,middleware,ai-safety,prompt-injection,llm,cost-guard,audit-trail,agent-security,asgi,wsgi
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Security
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware
+Classifier: Framework :: FastAPI
+Classifier: Framework :: Flask
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: ai-injection-guard>=0.1.0
+Requires-Dist: ai-cost-guard>=0.1.0
+Requires-Dist: ai-decision-tracer>=0.1.0
+Provides-Extra: signed
+Requires-Dist: cryptography>=41; extra == "signed"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.21; extra == "dev"
+
+# agent-safety-middleware
+
+One-line safety middleware for AI agent APIs. Prompt injection scanning, cost budgets, decision audit trails.
+
+## Install
+
+```bash
+pip install agent-safety-middleware
+```
+
+## FastAPI
+
+```python
+from fastapi import FastAPI
+from agent_safety_middleware import AgentSafetyMiddleware
+
+app = FastAPI()
+app.add_middleware(AgentSafetyMiddleware)
+```
+
+## Flask
+
+```python
+from flask import Flask
+from agent_safety_middleware import FlaskAgentSafety
+
+app = Flask(__name__)
+FlaskAgentSafety(app)
+```
+
+## Decorator
+
+```python
+from agent_safety_middleware import safe_endpoint
+
+@app.post("/chat")
+@safe_endpoint(injection_threshold=5, max_cost_per_request=0.50)
+async def chat(prompt: str):
+    ...
+```
+
+## Standalone
+
+```python
+from agent_safety_middleware import SafetyGuard
+
+guard = SafetyGuard(injection_threshold=5, max_cost_per_session=10.00)
+result = guard.check("user input here")
+if not result.safe:
+    print(f"Blocked: {result.blocked_reason}")
+```
+
+Automatically scans POST/PUT/PATCH request bodies for injection attacks across 69 patterns. Adds `X-Safety-*` response headers. Zero config required.

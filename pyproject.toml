@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-safety-middleware"
+version = "0.1.0"
+description = "One-line safety middleware for AI agent APIs. Prompt injection scanning, cost budgets, decision audit trails. Works with FastAPI, Flask, and any ASGI/WSGI framework."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    {name = "LuciferForge", email = "LuciferForge@proton.me"},
+]
+keywords = [
+    "fastapi", "flask", "middleware", "ai-safety", "prompt-injection",
+    "llm", "cost-guard", "audit-trail", "agent-security", "asgi", "wsgi",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Security",
+    "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
+    "Framework :: FastAPI",
+    "Framework :: Flask",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "ai-injection-guard>=0.1.0",
+    "ai-cost-guard>=0.1.0",
+    "ai-decision-tracer>=0.1.0",
+]
+
+[project.optional-dependencies]
+signed = ["cryptography>=41"]
+dev = ["pytest>=7.0", "pytest-asyncio>=0.21"]
+
+[project.urls]
+Homepage = "https://github.com/LuciferForge/agent-safety-middleware"
+Repository = "https://github.com/LuciferForge/agent-safety-middleware"
+
+[tool.setuptools.packages.find]
+include = ["agent_safety_middleware*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
