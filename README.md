@@ -50,4 +50,4 @@ if not result.safe:
     print(f"Blocked: {result.blocked_reason}")
 ```
 
-Automatically scans POST/PUT/PATCH request bodies for injection attacks across 69 patterns. Adds `X-Safety-*` response headers. Zero config required.
+Automatically scans POST/PUT/PATCH request bodies for injection attacks across 75 patterns across 9 categories. Adds `X-Safety-*` response headers. Zero config required.
